@@ -57,7 +57,7 @@ public class DBentry extends HttpServlet
 		
 		//entry(user,password);
 		
-		String query = "Select * from Lab5.lab5 where ItemNum = \'" + user + "\'";
+		String query = "Select * from Lab6.lab6 where ItemNum = \'" + user + "\'";
 		//System.out.println("Query in doGEt: "+query);
 		try
 		{
@@ -123,7 +123,7 @@ public class DBentry extends HttpServlet
 			
 			try 
 			{			
-				dbconn = DriverManager.getConnection(dbPath,"root","password");
+				dbconn = DriverManager.getConnection(dbPath,"root","cd/zZXZS+0oz");
 				//System.out.println("gain the connection");
 				return dbconn;
 			}
@@ -190,7 +190,7 @@ public class DBentry extends HttpServlet
 			pass = PWCrypto.encrypt(pass);
 			//System.out.println("Encrypted Pass: "+pass);
 			
-			instance.DBentry("INSERT INTO Lab6.lab6 (`UserName`, `Password`, `FirstName`, `LastName`) " +
+			instance.DBentry("INSERT INTO Lab6.Lab6 (`UserName`, `Password`, `FirstName`, `LastName`) " +
 								"VALUES ( '"+user+"' ,'"+pass+"' ,'"+firstName+ "' ,'"+ lastName +"');");	
 			
 			//System.out.println("After insert statement ");
@@ -206,7 +206,7 @@ public class DBentry extends HttpServlet
 	public boolean userLookUp(String user, String pass) throws SQLException
 	{
 		boolean lookUp = false;
-		String query = "Select * from Lab6.lab6 where UserName = '" + user+ "';";
+		String query = "Select * from Lab6.Lab6 where UserName = '" + user+ "';";
 		dbconn=instance.newConnection();
 		sql=dbconn.prepareStatement(query);
 
