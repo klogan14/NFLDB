@@ -123,7 +123,7 @@ public class DBentry extends HttpServlet
 			
 			try 
 			{			
-				dbconn = DriverManager.getConnection(dbPath,"root","cd/zZXZS+0oz");
+				dbconn = DriverManager.getConnection(dbPath,"root","password");
 				//System.out.println("gain the connection");
 				return dbconn;
 			}
