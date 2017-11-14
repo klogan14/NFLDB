@@ -7,6 +7,7 @@
 <title>Logged Out</title>
 </head>
 <body>
+
 	You have logged out successfully! <br/><br/>
 
 </body>

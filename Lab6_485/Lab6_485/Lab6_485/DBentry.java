@@ -176,6 +176,32 @@ public class DBentry extends HttpServlet
 		}
 	}
 	
+	
+	
+	public boolean entry( String query) 
+	{
+		//Explore use of metadata pull out meta data essentially
+		//build multiple web pages, to allow user to enter different information
+		//encryption
+		//hibernate
+		
+		try 
+		{
+			
+			
+			
+			instance.DBentry(query);	
+			
+			System.out.println("After insert statement ");
+			return true;
+		}
+		catch ( Exception err ) 
+		{
+			err.getStackTrace();
+			return false;
+		}
+	}
+	
 	public boolean entry( String user, String pass, String firstName, String lastName) 
 	{
 		//Explore use of metadata pull out meta data essentially
