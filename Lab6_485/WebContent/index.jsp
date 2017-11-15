@@ -12,16 +12,16 @@
 <body background = "${pageContext.request.contextPath}/images/NFN2.jpg">
 <%@ page import="java.io.*" %> 
 <%@ page import="Lab6_485.*" %>
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">Home</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Bears</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Lions</button>
-  <button class="tablinks" onclick="packers.jsp">Packers</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Vikings</button>
+
+<div class="topnav">
+  <a href="index.jsp">Home</a>
+  <a href="Bears.jsp">Bears</a>
+  <a href="Lions.jsp">Lions</a>
+  <a href="packers.jsp">Packers</a>
+  <a href="Vikings.jsp">Vikings</a>
 </div>
-<h1 align="center">
-NFC North DB Web Application
-</h1>
+
+<h1 align="center">NFC North DB Web Application</h1>
 
 
 <form  action="index.jsp" method="get" >
