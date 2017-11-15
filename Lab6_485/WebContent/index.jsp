@@ -35,7 +35,7 @@ Select a team
 	</select>
 	<br/>Search Options<br/>
 	
-	  <input type="radio" name="SO" value="GetRoster" /> Get Rosters
+	  <input type="radio" name="SO" value="GetRoster" /> Get Rosters 
 	  <input type="radio" name="SO" value="GetRoster"/> Position Salary Chart<br>
 	  	
 	
