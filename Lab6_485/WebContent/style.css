@@ -9,5 +9,15 @@ h1
 
 form{
 	color:white;
-	text-shadow: -5px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	text-shadow: -3px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+body{
+	background-size:cover;
+	
+}
+div{
+	color:white
+}
+div1{
+	color:navy blue;
 }
