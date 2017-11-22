@@ -7,11 +7,17 @@
 <body background = "${pageContext.request.contextPath}/images/v.jpg">
 <link rel = "stylesheet" type = "text/css" href = "${pageContext.request.contextPath}/style.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>NFC N. DB App</title>
+<title>Vikings</title>
 </head>
 <%@ page import="java.io.*" %> 
 <%@ page import="Lab6_485.*" %>
-
+<div class="topnav">
+  <a href="index.jsp">Home</a>
+  <a href="Bears.jsp">Bears</a>
+  <a href="Lions.jsp">Lions</a>
+  <a href="packers.jsp">Packers</a>
+  <a href="Vikings.jsp">Vikings</a>
+</div>
 <h1 align="center">
 Minnesota Vikings
 </h1>

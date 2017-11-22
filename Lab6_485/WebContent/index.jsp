@@ -26,41 +26,45 @@
 
 <form  action="index.jsp" method="get" >
 Select a team
-	<select>
-		  <option value="Bears">Bears</option>
-		  <option value="Lions">Lions</option>
-		  <option value="Packers">Packers</option>
-		  <option value="Vikings">Vikings</option>
-		  <option value="AllTeams">All Teams</option>
+	<select name = "Team">
+		  <option value="All">All Teams</option>
 	</select>
 	<br/>Search Options<br/>
-	
-	  <input type="radio" name="SO" value="GetRoster" /> Get Rosters 
-	  <input type="radio" name="SO" value="GetRoster"/> Position Salary Chart<br>
-	  	
-	
-
+	  <input type="radio" name="SO" value="HighestPaidPs" /> Highest Paid Players
+	  <input type="radio" name="SO" value="HighestPaidC"/> Highest Paid Coach<br>
+	  <input type="radio" name="SO" value="Highest Team Networ"/> Highest Net Worth<br>
+	  <input type="radio" name="SO" value="StateTotals"/> # of Players From States<br>
+	  
 <input type="submit" Value="Submit" ></input>
 </form>
+
+<!-- <img src="${pageContext.request.contextPath}/images/Pie_Chart_BearsPGSalary.jpg" 
+alt="Smiley face" height="560" width="700">
+ -->
+
 <%
-String user=request.getParameter("user");
-String pass=request.getParameter("password");
-if (user!= null&&!user.trim().equals(""))
+String team=request.getParameter("Team");
+String radio=request.getParameter("SO");
+System.out.println("Printed");
+
+if (team!= null && !team.trim().equals("") && radio!= null)
 {
-	DBentry DBentry=new DBentry();
-	boolean flag = DBentry.userLookUp(user, pass);
 	
-	if(flag) 
+	if(team.equals("All") && radio.equals("StateTotals"))
 	{
-		%><script type="text/javascript">window.location.replace("welcome.jsp");</script><%
+		 %>
+		 <div style="display: flex; justify-content: center;">
+		 <img src="${pageContext.request.contextPath}/images/StateTotals.png" 
+				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
+		</div>
+		<%
+		System.out.println("Bears");
 	}
-	else { 
-		%><script type="text/javascript">window.location.replace("registration.jsp");</script><%
-		
-	}
+	//DBentry DBentry=new DBentry();
+	//boolean flag = DBentry.userLookUp(team, pass);
+	
+	
 }
-
 %>
-
 </body>
 </html>
