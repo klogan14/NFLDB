@@ -32,27 +32,27 @@ Stadium: Soldier Field<br><br>
 
 <form  action="Bears.jsp" method="get" >
 Select Category to View.<br>
-
-	
 	  <input type="radio" name="SO" value="WinsLosses" /> Overall Wins & Losses<br>
 	  <input type="radio" name="SO" value="List of Coaches"/> Overall Losses<br>
 	  <input type="radio" name="SO" value="2016Rec" /> 2016 Record <br>
 	  <input type="radio" name="SO" value="SalaryCapChart" /> Position Group Breakdown <br>
-	  <input type="radio" name="SO" value="NetCap" /> Net Cap<br>
-	  <input type="radio" name="SO" value="Team Worth" /> Team Worth<br>
-	  
-	  
-	  	
-	
-
+	  <input type="radio" name="SO" value="Team Worth" /> Get Team Worth<br>
 <input type="submit" Value="Submit" ></input>
+
+
 </form>
+
+
+<form action ="${pageContext.request.contextPath}/GetRoster" method = "get">
+	  <input type="radio" name="Roster" value="BearsRoster" /> Get Roster<br>
+	  <input type="submit" value="BearsRoster" /><br>
+</form>
+
 <%
 String option=request.getParameter("SO");
 String pass=request.getParameter("password");
-if (option!= null&&!option.trim().equals(""))
+if ((option!= null&&!option.trim().equals("")))
 {
-	
 	
 	if( option.equals("SalaryCapChart"))
 	{
@@ -62,11 +62,8 @@ if (option!= null&&!option.trim().equals(""))
 				 alt="Bears Salary Chart"  height="360" width="500" align="middle" >
 		</div>
 		<%
-		System.out.println("Bears");
 	}
-	
-	
-	
+
 }
 
 %>

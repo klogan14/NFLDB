@@ -46,7 +46,7 @@ alt="Smiley face" height="560" width="700">
 String team=request.getParameter("Team");
 String radio=request.getParameter("SO");
 System.out.println("Printed");
-
+//SqlQueries sqlQ = new SqlQueries();
 if (team!= null && !team.trim().equals("") && radio!= null)
 {
 	
@@ -58,7 +58,6 @@ if (team!= null && !team.trim().equals("") && radio!= null)
 				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
 		</div>
 		<%
-		System.out.println("Bears");
 	}
 	//DBentry DBentry=new DBentry();
 	//boolean flag = DBentry.userLookUp(team, pass);
