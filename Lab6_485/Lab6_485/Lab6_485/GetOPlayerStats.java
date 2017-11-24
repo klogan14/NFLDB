@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/GetRoster")
-public class GetRoster extends HttpServlet
+@WebServlet("/GetOPlayerStats")
+public class GetOPlayerStats extends HttpServlet 
 {
-	
+
 	private static final long serialVersionUID = 1L;
 	static DBentry instance = new DBentry();
 	Connection dbconn;
@@ -26,13 +26,7 @@ public class GetRoster extends HttpServlet
 	
 	//change URL to your database server as needed
 	String dbPath="jdbc:mysql://localhost:3306";
-	
-//	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
-//	{
-//		request.get
-//		doGet(request,response);
-//		System.out.println("DoPost Run");
-//	}
+
 	
 	public static DBentry getInstance() 
 	{
@@ -45,49 +39,22 @@ public class GetRoster extends HttpServlet
 
 		public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
 		{
-			int teamId= 1;
-			String team = request.getParameter("Roster");
-			String h1 = "";
-			String bc = ""; //background color hex
-			String tc = ""; //table color hex
-
-			if(team.equals("PackersRoster"))
-			{
-				h1 = "Packers Roster";
-				teamId = 1;
-				bc = "#175e33"; // forest green
-				tc = "#FFB81C"; // cheese gold 
-				
-				
-			}
-			else if(team.equals("VikingsRoster"))
-			{
-				h1 = "Vikings Roster";
+			//int teamId= 1;
+			//String team = request.getParameter("Roster");
+			String bc = "#FF0000"; //background color hex
+			String tc = "ffffff"; //table color hex
+			String StatType = request.getParameter("StatType");
+			String statNum = request.getParameter("statNumber");
 			
-				teamId = 2;
-				bc = "#512D6D"; // purple
-				tc = "#FFB81C"; // gold 
-			}
-			else if(team.equals("BearsRoster"))
-			{
-				h1 = "Bears Roster";
-				teamId = 3;
-				bc = "#051C2C"; //dark navy
-				tc = "#DC4405"; // orange
-
-			}
-			else
-			{
-				h1 = "Lions Roster";
-				teamId = 4;
-				bc = "#0069B1"; // honolulu blue
-				tc = "#66666;"; // silver
-			}
-		
-			String query = "select FirstName,LastName, Position,Age,Years,Salary\r\n" + 
-					"from NFLSchema.Person, NFlSchema.Player\r\n" + 
-					"where NFLSchema.Person.ID = NFLSchema.Player.P_Id and NFLSchema.Player.Team_Id = "+teamId+"\r\n" + 
-					"order by LastName asc;";
+			String h1 = "Players with greater than "+ statNum +" or more " + StatType;
+			String query = "select FirstName,LastName,"+StatType+",Position,NFLSchema.Team.Name\n" + 
+					"from NFLSchema.Person,NFLSchema.Player,NFLSchema.O_Player_Stats, NFLSchema.Team\n" + 
+					"where "+StatType+" >=" +statNum+"\n" + 
+					"and NFLSchema.Person.ID = NFLSchema.O_Player_Stats.P_ID \n" + 
+					"and NFLSchema.Player.P_Id = NFLSchema.O_Player_Stats.P_ID \n" + 
+					"and NFLSchema.Player.Team_Id = NFLSchema.Team.Team_ID\n" + 
+					"order by " +StatType+" desc;";
+			System.out.println(query);
 			//System.out.println("Query in doGEt: "+query);
 			PrintWriter out = response.getWriter();
 			//url(\"${pageContext.request.contextPath}/images/c.jpg\"
@@ -95,7 +62,7 @@ public class GetRoster extends HttpServlet
 					"Transitional//EN\">\n";
 	        out.println(docType +"<HTML>\n"+
 					"<HEAD><TITLE>"+
-	        			"Roster"+ 
+	        			"Players with greater than "+ statNum +" " + StatType + 
 	        			"</TITLE>"+
 	        			"<style>"+
 	        			"body {background-color :  "+bc+" }"+
@@ -153,16 +120,13 @@ public class GetRoster extends HttpServlet
 	 		   + "Name" 
 	 		   + "</th>" 
 	 		   + "<th bgcolor="+tc+">"
-	 		   + "Position"
+	 		   + StatType
 	 		   + "</th>"
 	 		   + "<th bgcolor="+tc+">"
-			   + "Age" 
+			   + "Position" 
 			   + "</th>" 
 			   + "<th bgcolor="+tc+">"
-			   + "Years"
-			   + "</th>"
-			   + "<th bgcolor="+tc+">"
-			   + "Salary"
+			   + "Team"
 			   + "</th>"
 			   +"</tr>"
 	 		   );
@@ -170,30 +134,35 @@ public class GetRoster extends HttpServlet
 			String FirstName = "";
 			String LastName = "";
 			String Position = "";
-			String Age = "";
-			String Years = "";
-			String Salary = "";
-
+			//String Age = "";
+			String TeamName = "";
+			//String Salary = "";
+			String playerStatNums = "";
 			try
 			{
 			dbconn=instance.newConnection();
+			System.out.println("after new connection");
 			sql=dbconn.prepareStatement(query);
+			System.out.println("after prepare stmnt");
+
 			results=sql.executeQuery();
+			System.out.println("after pexecuting query");
+
 			System.out.println("Results DOGET: "+ results);
-			
+			System.out.println("Results " + results);
+			//System.out.println(results.getString("FirstName"));
 				while(results.next())
 				{
+					System.out.println("In while loop ");
 					FirstName = results.getString("FirstName");
 					LastName = results.getString("LastName");
 					Position = results.getString("Position");
-					Age = results.getString("Age");
-					Years = results.getString("Years");
-					Salary = results.getString("Salary");
-					 
+					TeamName = results.getString("Name");
+					playerStatNums = results.getString(StatType);
+					System.out.println(FirstName + " " + LastName + Position + TeamName + playerStatNums ); 
 			        out.write("\n");	 
 			        out.print
-		    	     	(
-			 		     "<tr>"
+		    	     	(    "<tr>"
 			 		   + "<td align=\"center\" bgcolor="+tc+">"
 			 		   + FirstName + " " + LastName
 			 		   + "</td>" 
@@ -201,21 +170,12 @@ public class GetRoster extends HttpServlet
 			 		   + Position
 			 		   + "</td>"
 			 		   + "<td align=\"center\" bgcolor="+tc+">"
-					   + Age
+					   + playerStatNums
 					   + "</td>" 
 					   + "<td align=\"center\" bgcolor="+tc+">"
-					   + Years
-					   + "</td>"
-					   + "<td align=\"center\" bgcolor="+tc+">"
-					   + "$"+Salary
-					   + "</td>"
+					   + TeamName
 					   +"</tr>"
 					   );
-			        
-					
-					
-					
-					
 				}
 				//System.out.println("Encrypted creditCard # doGet:" + ccNum);
 				
@@ -247,5 +207,4 @@ public class GetRoster extends HttpServlet
 			
 			
 		}
-	}
-
+}

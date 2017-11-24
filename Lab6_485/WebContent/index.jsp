@@ -34,13 +34,37 @@ Select a team
 	  <input type="radio" name="SO" value="HighestPaidC"/> Highest Paid Coach<br>
 	  <input type="radio" name="SO" value="Highest Team Networ"/> Highest Net Worth<br>
 	  <input type="radio" name="SO" value="StateTotals"/> # of Players From States<br>
+	  <input type="radio" name="SO" value="TeamState"/> # of Players From Team State<br>
 	  
 <input type="submit" Value="Submit" ></input>
 </form>
+<form action ="${pageContext.request.contextPath}/GetDPlayerStats" method = "get">
+Select players with more than or equal to <input type="text" name="statNumber" value="">
+<select name = "StatType">
+		  <option value="Tackles">Tackles</option>
+		  <option value="Sacks">Sacks</option>
+		  <option value="INTS">Interceptions</option>
+		  <option value="ForcedFumbles">Forced Fumbles </option>
+</select>
+<br>
+<input type="submit" Value="Submit" ></input>
+</form>
 
-<!-- <img src="${pageContext.request.contextPath}/images/Pie_Chart_BearsPGSalary.jpg" 
-alt="Smiley face" height="560" width="700">
- -->
+<form action ="${pageContext.request.contextPath}/GetOPlayerStats" method = "get">
+Select players with more than or equal to <input type="text" name="statNumber" value="">
+<select name = "StatType">
+		  <option value="PassingYards">Passing Yards</option>
+		  <option value="RushingYards">Rushing Yards</option>
+		  <option value="Receptions">Receptions</option>
+		  <option value="ReceivingYards">Receiving Yards</option>
+		  <option value="TDs">Touchdowns</option>		  
+		  <option value="GameStarts">Starts</option>
+		  <option value="FGMade">Field Goals Made</option>
+		  
+</select>
+<br>
+<input type="submit" Value="Submit" ></input>
+</form>
 
 <%
 String team=request.getParameter("Team");
@@ -55,6 +79,15 @@ if (team!= null && !team.trim().equals("") && radio!= null)
 		 %>
 		 <div style="display: flex; justify-content: center;">
 		 <img src="${pageContext.request.contextPath}/images/StateTotals.png" 
+				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
+		</div>
+		<%
+	}
+	if(team.equals("All") && radio.equals("TeamState"))
+	{
+		 %>
+		 <div style="display: flex; justify-content: center;">
+		 <img src="${pageContext.request.contextPath}/images/PlayersFromTeamState.png" 
 				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
 		</div>
 		<%

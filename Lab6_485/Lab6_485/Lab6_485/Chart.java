@@ -16,7 +16,7 @@ import org.jfree.data.jdbc.JDBCPieDataset;
 public class Chart {
 	public static void main(String[] args) throws Exception {
 		PreparedStatement sql;
-		String query = "select * from NFLSchema.PlayerStateTotals;";
+		String query = "select * from NFLSchema.PlayerFromTeamState;";
 		
 		Connection dbconn  = null;
 		      /* Create MySQL Database Connection */
@@ -47,10 +47,10 @@ public class Chart {
 		      
 		      while( resultSet.next( ) ) {
 		         dataset.setValue( 
-		         resultSet.getString( "HomeTownState" ) ,
+		         resultSet.getString( "Name" ) ,
 		         Double.parseDouble( resultSet.getString("PlayersFromState")));
 		      }
-		      JFreeChart chart = ChartFactory.createPieChart("Players From States ", dataset, true, true, false );
+		      JFreeChart chart = ChartFactory.createPieChart("Players From Team State ", dataset, true, true, false );
 				ChartPanel chartPanel = new ChartPanel(chart);
 				//chartPanel.set
 				chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
@@ -63,7 +63,7 @@ public class Chart {
 				f.setVisible(true);
 		      int width = 560;    /* Width of the image */
 		      int height = 370;   /* Height of the image */ 
-		      File pieChart = new File( "PlayerStates1.jpg" );
+		      File pieChart = new File( "PlayerFromTeamState.jpg" );
 		      ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
 	}
 }
