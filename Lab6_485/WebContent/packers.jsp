@@ -32,19 +32,24 @@ Stadium: Lambeau Field<br><br>
 
 <form  action="packers.jsp" method="get" >
 Select Category to View.<br>
-	  <input type="radio" name="SO" value="WinsLosses" /> Overall Wins & Losses<br>
-	  <input type="radio" name="SO" value="List of Coaches"/> Overall Losses<br>
-	  <input type="radio" name="SO" value="2016Rec" /> 2016 Record <br>
 	  <input type="radio" name="SO" value="SalaryCapChart" /> Position Group Breakdown <br>
-	  <input type="radio" name="SO" value="Team Worth" /> Get Team Worth<br>
 	  <input type="radio" name="SO" value="Roster" /> Get Roster<br>
 
 <input type="submit" Value="Submit" ></input>
 </form>
 
+
+<br><div>Click the buttons to get the coaches, players, or team statistics</div>
+<form action ="${pageContext.request.contextPath}/GetCoaches" method = "get">
+	  <input type="submit" name = "Coaches"  value="Packers Coaches" /><br>
+</form>
+
 <form action ="${pageContext.request.contextPath}/GetRoster" method = "get">
-	  <input type="radio" name="Roster" value="PackersRoster" /> Get Roster<br>
-	  <input type="submit" value="Packers Roster" /><br>
+	  <input type="submit" name="Roster" value="Packers Roster" /><br>
+</form>
+
+<form action ="${pageContext.request.contextPath}/GetTeamStats" method = "get">
+	  <input type="submit" name="TS" value="Packers Stats" /><br>
 </form>
 
 <%

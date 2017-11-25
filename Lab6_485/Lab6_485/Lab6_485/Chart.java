@@ -16,7 +16,7 @@ import org.jfree.data.jdbc.JDBCPieDataset;
 public class Chart {
 	public static void main(String[] args) throws Exception {
 		PreparedStatement sql;
-		String query = "select * from NFLSchema.PlayerFromTeamState;";
+		String query = "select * from NFLSchema.TeamStadiumComparrison;";
 		
 		Connection dbconn  = null;
 		      /* Create MySQL Database Connection */
@@ -48,9 +48,9 @@ public class Chart {
 		      while( resultSet.next( ) ) {
 		         dataset.setValue( 
 		         resultSet.getString( "Name" ) ,
-		         Double.parseDouble( resultSet.getString("PlayersFromState")));
+		         Double.parseDouble( resultSet.getString("Capacity")));
 		      }
-		      JFreeChart chart = ChartFactory.createPieChart("Players From Team State ", dataset, true, true, false );
+		      JFreeChart chart = ChartFactory.createPieChart("Stadium Size Comparrison", dataset, true, true, false );
 				ChartPanel chartPanel = new ChartPanel(chart);
 				//chartPanel.set
 				chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));

@@ -32,17 +32,22 @@ Stadium: Ford Field<br><br>
 
 <form  action="Lions.jsp" method="get" >
 Select Category to View.<br>
-	  <input type="radio" name="SO" value="WinsLosses" /> Overall Wins & Losses<br>
-	  <input type="radio" name="SO" value="List of Coaches"/> Overall Losses<br>
-	  <input type="radio" name="SO" value="2016Rec" /> 2016 Record <br>
 	  <input type="radio" name="SO" value="SalaryCapChart" /> Position Group Breakdown <br>
-	  <input type="radio" name="SO" value="Team Worth" /> Get Team Worth<br>
 <input type="submit" Value="Submit" ></input>
 </form>
 
+<br><div>Click the buttons to get the coaches, players, or team statistics</div>
+
+<form action ="${pageContext.request.contextPath}/GetCoaches" method = "get">
+	  <input type="submit" name = "Coaches" value="Lions Coaches" /><br>
+</form>
+
 <form action ="${pageContext.request.contextPath}/GetRoster" method = "get">
-	  <input type="radio" name="Roster" value="LionsRoster" /> Get Roster<br>
-	  <input type="submit" value="Lions Roster" /><br>
+	  <input type="submit" name="Roster" value="Lions Roster" /><br>
+</form>
+
+<form action ="${pageContext.request.contextPath}/GetTeamStats" method = "get">
+	  <input type="submit" name="TS" value="Lions Stats" /><br>
 </form>
 
 <%

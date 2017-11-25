@@ -1,5 +1,6 @@
 package Lab6_485;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -12,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/GetRoster")
-public class GetRoster extends HttpServlet
+@WebServlet("/GetTeamStats")
+public class TeamStats extends HttpServlet
 {
 	
 	private static final long serialVersionUID = 1L;
@@ -38,32 +39,32 @@ public class GetRoster extends HttpServlet
 
 		public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
 		{
-			int teamId= 1;
-			String team = request.getParameter("Roster");
+			int teamId= 0;
+			String team = request.getParameter("TS");
 			String h1 = "";
 			String bc = ""; //background color hex
 			String tc = ""; //table color hex
 			
-			if(team.equals("Packers Roster"))
+			if(team.equals("Packers Stats"))
 			{
-				h1 = "Packers Roster";
+				h1 = "Packers Stats";
 				teamId = 1;
 				bc = "#175e33"; // forest green
 				tc = "#FFB81C"; // cheese gold 
 				
 				
 			}
-			else if(team.equals("Vikings Roster"))
+			else if(team.equals("Vikings Stats"))
 			{
-				h1 = "Vikings Roster";
+				h1 = "Vikings Stats";
 			
 				teamId = 2;
 				bc = "#512D6D"; // purple
 				tc = "#FFB81C"; // gold 
 			}
-			else if(team.equals("Bears Roster"))
+			else if(team.equals("Bears Stats"))
 			{
-				h1 = "Bears Roster";
+				h1 = "Bears Stats";
 				teamId = 3;
 				bc = "#051C2C"; //dark navy
 				tc = "#DC4405"; // orange
@@ -71,16 +72,16 @@ public class GetRoster extends HttpServlet
 			}
 			else
 			{
-				h1 = "Lions Roster";
+				h1 = "Lions Stats";
 				teamId = 4;
 				bc = "#0069B1"; // honolulu blue
 				tc = "#66666;"; // silver
 			}
 		
-			String query = "select FirstName,LastName, Position,Age,Years,Salary\r\n" + 
-					"from NFLSchema.Person, NFlSchema.Player\r\n" + 
-					"where NFLSchema.Person.ID = NFLSchema.Player.P_Id and NFLSchema.Player.Team_Id = "+teamId+"\r\n" + 
-					"order by LastName asc;";
+			String query = "select Seasons,Overall_Wins, Overall_Losses, Wins2016, Losses2016, Playoff_Record,SB_Appearances,SB_Wins,Championships\n" + 
+					"from NFLSchema.Team, NFLSchema.Team_Stats\n" + 
+					"where Team.Team_ID ="+teamId+" and Team_Stats.Team_ID = " + teamId+ ";\n" + 
+					"";
 			//System.out.println("Query in doGEt: "+query);
 			PrintWriter out = response.getWriter();
 			//url(\"${pageContext.request.contextPath}/images/c.jpg\"
@@ -143,29 +144,44 @@ public class GetRoster extends HttpServlet
 	    	     (
 	 		    "<tr>"
 	 		   + "<th bgcolor="+tc+">"
-	 		   + "Name" 
+	 		   + "Seasons" 
 	 		   + "</th>" 
 	 		   + "<th bgcolor="+tc+">"
-	 		   + "Position"
+	 		   + "Total Wins"
 	 		   + "</th>"
 	 		   + "<th bgcolor="+tc+">"
-			   + "Age" 
+			   + "Total Lossess" 
 			   + "</th>" 
 			   + "<th bgcolor="+tc+">"
-			   + "Years"
+			   + "2016 Wins"
 			   + "</th>"
 			   + "<th bgcolor="+tc+">"
-			   + "Salary"
+			   + "2016 Losses"
 			   + "</th>"
+			   + "<th bgcolor="+tc+">"
+			   + "Playoff Record" 
+			   + "</th>" 
+			   + "<th bgcolor="+tc+">"
+			   + "Super Bowl Appearances"
+			   + "</th>"
+			   + "<th bgcolor="+tc+">"
+			   + "Super Bowl Wins" 
+			   + "</th>" 
+			   + "<th bgcolor="+tc+">"
+			   + "Championships"
+			   +	 "</th>"
 			   +"</tr>"
 	 		   );
 			
-			String FirstName = "";
-			String LastName = "";
-			String Position = "";
-			String Age = "";
-			String Years = "";
-			String Salary = "";
+			String Seasons = "";
+			String TW = "";
+			String TL = "";
+			String Wins2016 = "";
+			String Losses2016 = "";
+			String PlayoffRec = "";
+			String SBApps = "";
+			String SBWins = "";
+			String Champs = "";
 
 			try
 			{
@@ -176,31 +192,48 @@ public class GetRoster extends HttpServlet
 			
 				while(results.next())
 				{
-					FirstName = results.getString("FirstName");
-					LastName = results.getString("LastName");
-					Position = results.getString("Position");
-					Age = results.getString("Age");
-					Years = results.getString("Years");
-					Salary = results.getString("Salary");
+					Seasons = results.getString("Seasons");
+					TW = results.getString("Overall_Wins");
+					TL = results.getString("Overall_Losses");
+					Wins2016 = results.getString("Wins2016");
+					Losses2016 = results.getString("Losses2016");
+					 PlayoffRec = results.getString("Playoff_Record");;
+
+					SBApps = results.getString("SB_Appearances");
+					SBWins = results.getString("SB_Wins");
+					Champs = results.getString("Championships");
+
 					 
 			        out.write("\n");	 
 			        out.print
 		    	     	(
 			 		     "<tr>"
 			 		   + "<td align=\"center\" bgcolor="+tc+">"
-			 		   + FirstName + " " + LastName
+			 		   + Seasons
 			 		   + "</td>" 
 			 		   + "<td align=\"center\" bgcolor="+tc+">"
-			 		   + Position
+			 		   + TW
 			 		   + "</td>"
 			 		   + "<td align=\"center\" bgcolor="+tc+">"
-					   + Age
+					   + TL
 					   + "</td>" 
 					   + "<td align=\"center\" bgcolor="+tc+">"
-					   + Years
+					   + Wins2016
 					   + "</td>"
 					   + "<td align=\"center\" bgcolor="+tc+">"
-					   + "$"+Salary
+					   + Losses2016
+					   + "</td>"
+					   + "<td align=\"center\" bgcolor="+tc+">"
+					   + PlayoffRec
+					   + "</td>" 
+					   + "<td align=\"center\" bgcolor="+tc+">"
+					   + SBApps
+					   + "</td>" 
+					   + "<td align=\"center\" bgcolor="+tc+">"
+					   + SBWins
+					   + "</td>"
+					   + "<td align=\"center\" bgcolor="+tc+">"
+					   + Champs
 					   + "</td>"
 					   +"</tr>"
 					   );

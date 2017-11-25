@@ -30,14 +30,21 @@ Select a team
 		  <option value="All">All Teams</option>
 	</select>
 	<br/>Search Options<br/>
-	  <input type="radio" name="SO" value="HighestPaidPs" /> Highest Paid Players
-	  <input type="radio" name="SO" value="HighestPaidC"/> Highest Paid Coach<br>
-	  <input type="radio" name="SO" value="Highest Team Networ"/> Highest Net Worth<br>
+	  <input type="radio" name="SO" value="StadiumSize"/> Stadium Size Comparrison<br>
 	  <input type="radio" name="SO" value="StateTotals"/> # of Players From States<br>
 	  <input type="radio" name="SO" value="TeamState"/> # of Players From Team State<br>
 	  
 <input type="submit" Value="Submit" ></input>
 </form>
+
+<br>
+
+<form action ="${pageContext.request.contextPath}/HighestPaidPlayers" method = "get">
+	  <input type="submit" name="HPP" value="Highest Paid Players" /><br>
+</form>
+
+<br>
+
 <form action ="${pageContext.request.contextPath}/GetDPlayerStats" method = "get">
 Select players with more than or equal to <input type="text" name="statNumber" value="">
 <select name = "StatType">
@@ -83,11 +90,20 @@ if (team!= null && !team.trim().equals("") && radio!= null)
 		</div>
 		<%
 	}
-	if(team.equals("All") && radio.equals("TeamState"))
+	else if(team.equals("All") && radio.equals("TeamState"))
 	{
 		 %>
 		 <div style="display: flex; justify-content: center;">
 		 <img src="${pageContext.request.contextPath}/images/PlayersFromTeamState.png" 
+				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
+		</div>
+		<%
+	}
+	else if(team.equals("All") && radio.equals("StadiumSize"))
+	{
+		 %>
+		 <div style="display: flex; justify-content: center;">
+		 <img src="${pageContext.request.contextPath}/images/StadiumSizeComparrison.png" 
 				 alt="PlayerStateTotals"  height="460" width="600" align="middle" >
 		</div>
 		<%
