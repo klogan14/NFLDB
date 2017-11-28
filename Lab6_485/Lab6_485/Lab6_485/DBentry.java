@@ -76,7 +76,7 @@ public class DBentry extends HttpServlet
 			
 			try 
 			{
-				password = PWCrypto.decrypt(password);
+
 			} 
 			catch (Exception e) 
 			{
@@ -213,7 +213,6 @@ public class DBentry extends HttpServlet
 		{
 			
 			//System.out.println("UserName & Pass"+user + " " + pass+firstName + " " + lastName);
-			pass = PWCrypto.encrypt(pass);
 			//System.out.println("Encrypted Pass: "+pass);
 			
 			instance.DBentry("INSERT INTO Lab6.Lab6 (`UserName`, `Password`, `FirstName`, `LastName`) " +

@@ -21,7 +21,7 @@
   <a href="Vikings.jsp">Vikings</a>
 </div>
 
-<h1 align="center">NFC North DB Web Application</h1>
+<h1 align="center">NFC North Encyclopedia</h1>
 
 
 <form  action="index.jsp" method="get" >

@@ -33,8 +33,6 @@ Stadium: Lambeau Field<br><br>
 <form  action="packers.jsp" method="get" >
 Select Category to View.<br>
 	  <input type="radio" name="SO" value="SalaryCapChart" /> Position Group Breakdown <br>
-	  <input type="radio" name="SO" value="Roster" /> Get Roster<br>
-
 <input type="submit" Value="Submit" ></input>
 </form>
 
